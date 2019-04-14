@@ -32,7 +32,7 @@ var configs = (function () {
         invalid_command_message: "<value>: command not found.",
         reboot_message: "Preparing to reboot...\n\n3...\n\n2...\n\n1...\n\nRebooting...\n\n",
         permission_denied_message: "Unable to '<value>', permission denied.",
-        sudo_message: "Unable to sudo using a web client.",
+        sudo_message: "Unable to sudo, please contact your administrator.",
         usage: "Usage",
         file: "file",
         file_not_found: "File '<value>' not found.",
@@ -43,7 +43,7 @@ var configs = (function () {
         language: "Language",
         value_token: "<value>",
         host: "in1t.sh",
-        user: "root",
+        user: "guest",
         is_root: false,
         type_delay: 5
     };
