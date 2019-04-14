@@ -45,7 +45,7 @@ var configs = (function () {
         host: "in1t.sh",
         user: "guest",
         is_root: false,
-        type_delay: 5
+        type_delay: 10
     };
     return {
         getInstance: function (options) {
