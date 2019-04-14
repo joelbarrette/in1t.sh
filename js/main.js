@@ -13,8 +13,8 @@ var configs = (function () {
     };
     Singleton.defaultOptions = {
         general_help: "commands:",
-        ls_help: "list directory",
-        cat_help: "read file",
+        ls_help: "list files and directories",
+        readfile_help: "read file",
         whoami_help: "print the current users details",
         date_help: "print the system date and time",
         help_help: "print this menu",
@@ -120,7 +120,7 @@ var main = (function () {
 
     var cmds = {
         LS: { value: "ls", help: configs.getInstance().ls_help },
-        CAT: { value: "cat", help: configs.getInstance().cat_help },
+        READFILE: { value: "readfile", help: configs.getInstance().readfile_help },
         WHOAMI: { value: "whoami", help: configs.getInstance().whoami_help },
         DATE: { value: "date", help: configs.getInstance().date_help },
         HELP: { value: "help", help: configs.getInstance().help_help },
@@ -219,7 +219,7 @@ var main = (function () {
             Terminal.makeElementDisappear(element);
             element.onclick = function (file, event) {
                 this.handleSidenav(event);
-                this.cmdLine.value = "cat " + file + " ";
+                this.cmdLine.value = "readfile " + file + " ";
                 this.handleCmd();
             }.bind(this, file);
             element.appendChild(document.createTextNode(capFirst(file.replace(/\.[^/.]+$/, "").replace(/_/g, " "))));
@@ -269,19 +269,19 @@ var main = (function () {
 
     Terminal.prototype.handleFill = function () {
         var cmdComponents = this.cmdLine.value.trim().split(" ");
-        if ((cmdComponents.length <= 1) || (cmdComponents.length === 2 && cmdComponents[0] === cmds.CAT.value)) {
+        if ((cmdComponents.length <= 1) || (cmdComponents.length === 2 && cmdComponents[0] === cmds.READFILE.value)) {
             this.lock();
             var possibilities = [];
-            if (cmdComponents[0].toLowerCase() === cmds.CAT.value) {
+            if (cmdComponents[0].toLowerCase() === cmds.READFILE.value) {
                 if (cmdComponents.length === 1) {
                     cmdComponents[1] = "";
                 }
                 if (configs.getInstance().welcome_file_name.startsWith(cmdComponents[1].toLowerCase())) {
-                    possibilities.push(cmds.CAT.value + " " + configs.getInstance().welcome_file_name);
+                    possibilities.push(cmds.READFILE.value + " " + configs.getInstance().welcome_file_name);
                 }
                 for (var file in files.getInstance()) {
                     if (file.startsWith(cmdComponents[1].toLowerCase())) {
-                        possibilities.push(cmds.CAT.value + " " + file);
+                        possibilities.push(cmds.READFILE.value + " " + file);
                     }
                 }
             } else {
@@ -310,8 +310,8 @@ var main = (function () {
         var cmdComponents = this.cmdLine.value.trim().split(" ");
         this.lock();
         switch (cmdComponents[0]) {
-            case cmds.CAT.value:
-                this.cat(cmdComponents);
+            case cmds.READFILE.value:
+                this.readfile(cmdComponents);
                 break;
             case cmds.LS.value:
                 this.ls();
@@ -347,10 +347,10 @@ var main = (function () {
         };
     };
 
-    Terminal.prototype.cat = function (cmdComponents) {
+    Terminal.prototype.readfile = function (cmdComponents) {
         var result;
         if (cmdComponents.length <= 1) {
-            result = configs.getInstance().usage + ": " + cmds.CAT.value + " <" + configs.getInstance().file + ">";
+            result = configs.getInstance().usage + ": " + cmds.READFILE.value + " <" + configs.getInstance().file + ">";
         } else if (!cmdComponents[1] || (!cmdComponents[1] === configs.getInstance().welcome_file_name || !files.getInstance().hasOwnProperty(cmdComponents[1]))) {
             result = configs.getInstance().file_not_found.replace(configs.getInstance().value_token, cmdComponents[1]);
         } else {
