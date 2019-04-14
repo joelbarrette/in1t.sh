@@ -396,7 +396,7 @@ var main = (function () {
     };
 
     Terminal.prototype.reboot = function () {
-        this.type(configs.getInstance().reboot_message, this.reset.bind(this));
+        // this.type(configs.getInstance().reboot_message, this.reset.bind(this));
     };
 
     Terminal.prototype.reset = function () {
