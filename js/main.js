@@ -14,7 +14,7 @@ var configs = (function () {
     Singleton.defaultOptions = {
         general_help: "commands:",
         ls_help: "list files and directories",
-        readfile_help: "read file",
+        open_help: "read file",
         whoami_help: "print the current users details",
         date_help: "print the system date and time",
         help_help: "print this menu",
@@ -71,7 +71,8 @@ var files = (function () {
         "getting_started.txt": "First, go to js/main.js and replace all the text on both singleton vars.\n- configs: All the text used on the website.\n- files: All the fake files used on the website. These files are also used to be listed on the sidenav.\nAlso please notice if a file content is a raw URL, when clicked/concatenated it will be opened on a new tab.\nDon't forget also to:\n- Change the page title on the index.html file\n- Change the website color on the css/main.css\n- Change the images located at the img folder. The suggested sizes are 150x150 for the avatar and 32x32/16x16 for the favicon.",
         "contact.txt": "mail@example.com",
         "soundcloud": "https://www.soundcloud.com/in1t",
-        "twitch": "https://twitch.tv/in1tmusic"
+        "twitch": "https://twitch.tv/in1tmusic",
+		"secret stash": "/secret-stash.html"
     };
     return {
         getInstance: function (options) {
@@ -120,7 +121,7 @@ var main = (function () {
 
     var cmds = {
         LS: { value: "ls", help: configs.getInstance().ls_help },
-        READFILE: { value: "readfile", help: configs.getInstance().readfile_help },
+        OPEN: { value: "open", help: configs.getInstance().open_help },
         WHOAMI: { value: "whoami", help: configs.getInstance().whoami_help },
         DATE: { value: "date", help: configs.getInstance().date_help },
         HELP: { value: "help", help: configs.getInstance().help_help },
@@ -131,7 +132,7 @@ var main = (function () {
         RM: { value: "rm", help: configs.getInstance().rm_help },
         RMDIR: { value: "rmdir", help: configs.getInstance().rmdir_help },
         TOUCH: { value: "touch", help: configs.getInstance().touch_help },
-        SUDO: { value: "sudo", help: configs.getInstance().sudo_help }
+        SUDO: { value: "sudo", help: configs.getInstance().sudo_help}
     };
 
     var Terminal = function (prompt, cmdLine, output, sidenav, profilePic, user, host, root, outputTimer) {
@@ -219,7 +220,7 @@ var main = (function () {
             Terminal.makeElementDisappear(element);
             element.onclick = function (file, event) {
                 this.handleSidenav(event);
-                this.cmdLine.value = "readfile " + file + " ";
+                this.cmdLine.value = "open " + file + " ";
                 this.handleCmd();
             }.bind(this, file);
             element.appendChild(document.createTextNode(capFirst(file.replace(/\.[^/.]+$/, "").replace(/_/g, " "))));
@@ -269,19 +270,19 @@ var main = (function () {
 
     Terminal.prototype.handleFill = function () {
         var cmdComponents = this.cmdLine.value.trim().split(" ");
-        if ((cmdComponents.length <= 1) || (cmdComponents.length === 2 && cmdComponents[0] === cmds.READFILE.value)) {
+        if ((cmdComponents.length <= 1) || (cmdComponents.length === 2 && cmdComponents[0] === cmds.OPEN.value)) {
             this.lock();
             var possibilities = [];
-            if (cmdComponents[0].toLowerCase() === cmds.READFILE.value) {
+            if (cmdComponents[0].toLowerCase() === cmds.OPEN.value) {
                 if (cmdComponents.length === 1) {
                     cmdComponents[1] = "";
                 }
                 if (configs.getInstance().welcome_file_name.startsWith(cmdComponents[1].toLowerCase())) {
-                    possibilities.push(cmds.READFILE.value + " " + configs.getInstance().welcome_file_name);
+                    possibilities.push(cmds.OPEN.value + " " + configs.getInstance().welcome_file_name);
                 }
                 for (var file in files.getInstance()) {
                     if (file.startsWith(cmdComponents[1].toLowerCase())) {
-                        possibilities.push(cmds.READFILE.value + " " + file);
+                        possibilities.push(cmds.OPEN.value + " " + file);
                     }
                 }
             } else {
@@ -310,8 +311,8 @@ var main = (function () {
         var cmdComponents = this.cmdLine.value.trim().split(" ");
         this.lock();
         switch (cmdComponents[0]) {
-            case cmds.READFILE.value:
-                this.readfile(cmdComponents);
+            case cmds.OPEN.value:
+                this.open(cmdComponents);
                 break;
             case cmds.LS.value:
                 this.ls();
@@ -347,10 +348,10 @@ var main = (function () {
         };
     };
 
-    Terminal.prototype.readfile = function (cmdComponents) {
+    Terminal.prototype.open = function (cmdComponents) {
         var result;
         if (cmdComponents.length <= 1) {
-            result = configs.getInstance().usage + ": " + cmds.READFILE.value + " <" + configs.getInstance().file + ">";
+            result = configs.getInstance().usage + ": " + cmds.OPEN.value + " <" + configs.getInstance().file + ">";
         } else if (!cmdComponents[1] || (!cmdComponents[1] === configs.getInstance().welcome_file_name || !files.getInstance().hasOwnProperty(cmdComponents[1]))) {
             result = configs.getInstance().file_not_found.replace(configs.getInstance().value_token, cmdComponents[1]);
         } else {
