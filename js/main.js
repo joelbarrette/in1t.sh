@@ -72,7 +72,7 @@ var files = (function () {
         "contact.txt": "mail@example.com",
         "soundcloud": "https://www.soundcloud.com/in1t",
         "twitch": "https://twitch.tv/in1tmusic",
-		"secret_stash": "/secret-stash.html"
+		"secret_stash": "https://in1t.sh/secret-stash.html"
     };
     return {
         getInstance: function (options) {
