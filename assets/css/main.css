@@ -1728,10 +1728,15 @@
 	  padding-left: 70px;
 	  padding-right: 25px;
 	}
+
+	.left > .timeline-content > h2 {
+		text-align: left;
+	  }
   
   /* Make sure that all arrows are pointing leftwards */
 	.container::before {
 	  left: 60px;
+	  top: 43px;
 	  border: medium solid white;
 	  border-width: 10px 10px 10px 0;
 	  border-color: transparent white transparent transparent;
@@ -1739,7 +1744,7 @@
   
   /* Make sure all circles are at the same spot */
 	.left::after, .right::after {
-	  left: 15px;
+	  left: 21px;
 	}
   
   /* Make all right containers behave like the left ones */
@@ -1751,54 +1756,64 @@
   
 .blinking1{
 	animation:blinkingText 1s infinite;
+	color: rgba(255, 255, 255, 0.2)
 }
 @keyframes blinkingText{
-	0%{color: #ffffff;}
-	50%{	color: transparent;	}
-	95%{color: transparent;}
+	0%{color: transparent;}
+	5%{	color: transparent;	}
+	50%{color: rgba(255, 255, 255, 0.2);}
+	95%{	color: transparent;	}
+	100%{color: transparent;}
 }
 .blinking2{
 	animation:blinkingText 1s infinite;
 	animation-delay: .1s;
+	color: rgba(255, 255, 255, 0.2)
 }
 
 .blinking3{
 	animation:blinkingText 1s infinite;
 	animation-delay: .2s;
+	color: rgba(255, 255, 255, 0.2)
 }
-
 
 .blinking4{
 	animation:blinkingText 1s infinite;
 	animation-delay: .3s;
+	color: rgba(255, 255, 255, 0.2)
 }
 
 .blinking5{
 	animation:blinkingText 1s infinite;
 	animation-delay: .4s;
+	color: rgba(255, 255, 255, 0.2)
 }
 
 .blinking6{
 	animation:blinkingText 1s infinite;
 	animation-delay: .5s;
+	color: rgba(255, 255, 255, 0.2)
 }
-
 
 .blinking8{
 	animation:blinkingText 1s infinite;
 	animation-delay: .6s;
+	color: rgba(255, 255, 255, 0.2)
 }
 
 .blinking9{
 	animation:blinkingText 1s infinite;
 	animation-delay: .7s;
+	color: rgba(255, 255, 255, 0.2)
 }
 
 .blinking10{
 	animation:blinkingText 1s infinite;
 	animation-delay: .8s;
+	color: rgba(255, 255, 255, 0.2)
 }
 .blinking11{
 	animation:blinkingText 1s infinite;
-	animation-delay: .9;
+	animation-delay: .9s;
+	color: rgba(255, 255, 255, 0.2)
 }
