@@ -1747,3 +1747,58 @@
 	  left: 0%;
 	}
   }
+
+  
+.blinking1{
+	animation:blinkingText 1s infinite;
+}
+@keyframes blinkingText{
+	0%{color: #ffffff;}
+	50%{	color: transparent;	}
+	95%{color: transparent;}
+}
+.blinking2{
+	animation:blinkingText 1s infinite;
+	animation-delay: .1s;
+}
+
+.blinking3{
+	animation:blinkingText 1s infinite;
+	animation-delay: .2s;
+}
+
+
+.blinking4{
+	animation:blinkingText 1s infinite;
+	animation-delay: .3s;
+}
+
+.blinking5{
+	animation:blinkingText 1s infinite;
+	animation-delay: .4s;
+}
+
+.blinking6{
+	animation:blinkingText 1s infinite;
+	animation-delay: .5s;
+}
+
+
+.blinking8{
+	animation:blinkingText 1s infinite;
+	animation-delay: .6s;
+}
+
+.blinking9{
+	animation:blinkingText 1s infinite;
+	animation-delay: .7s;
+}
+
+.blinking10{
+	animation:blinkingText 1s infinite;
+	animation-delay: .8s;
+}
+.blinking11{
+	animation:blinkingText 1s infinite;
+	animation-delay: .9;
+}
